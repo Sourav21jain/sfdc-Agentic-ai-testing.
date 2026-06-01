@@ -1,0 +1,19 @@
+salesforce:
+  api_version: "v60.0"
+  streaming_channel: "/event/Case_Created__e"
+  reconnect_delay: 5
+  max_reconnect_attempts: 10
+
+insights:
+  data_source: "mock"  # Options: mock, tableau_api (future)
+  mock_data_path: "data/mock_insights.json"
+
+agent:
+  comment_prefix: "🔍 OpenShift Cluster Insights - Auto-Generated"
+  max_retries: 3
+  retry_delay_seconds: 5
+  include_support_tips: true
+
+logging:
+  format: "json"  # Options: json, text
+  file: "logs/agent.log"

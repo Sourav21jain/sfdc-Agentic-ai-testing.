@@ -1,0 +1,147 @@
+═══════════════════════════════════════════════════════════════════
+                    YOUR IMMEDIATE NEXT STEPS
+═══════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────┐
+│ STEP 1: CHOOSE YOUR PATH                                         │
+└─────────────────────────────────────────────────────────────────┘
+
+First Time User?
+  → cat HOW_TO_RUN.md
+  
+Experienced Developer?
+  → cat QUICK_START.md
+
+Just Want Overview?
+  → cat START_HERE.md
+
+┌─────────────────────────────────────────────────────────────────┐
+│ STEP 2: GET CREDENTIALS (10 minutes)                             │
+└─────────────────────────────────────────────────────────────────┘
+
+A. Salesforce Developer Org (FREE)
+   1. Visit: https://developer.salesforce.com/signup
+   2. Fill form and verify email
+   3. Follow SALESFORCE_SETUP.md for configuration
+   
+B. Anthropic API Key (FREE TIER AVAILABLE)
+   1. Visit: https://console.anthropic.com/
+   2. Sign up and create API key
+   3. Copy key (starts with sk-ant-...)
+
+┌─────────────────────────────────────────────────────────────────┐
+│ STEP 3: CONFIGURE THE AGENT (5 minutes)                          │
+└─────────────────────────────────────────────────────────────────┘
+
+Commands:
+  cd /Users/soujain/insights-tool
+  cp config/.env.example config/.env
+  nano config/.env
+
+Fill in:
+  SFDC_USERNAME=your.username@example.com
+  SFDC_PASSWORD=YourPassword
+  SFDC_SECURITY_TOKEN=TokenFromEmail
+  SFDC_DOMAIN=test
+  ANTHROPIC_API_KEY=sk-ant-your-key
+  LOG_LEVEL=INFO
+
+┌─────────────────────────────────────────────────────────────────┐
+│ STEP 4: RUN THE AGENT (2 minutes)                                │
+└─────────────────────────────────────────────────────────────────┘
+
+Command:
+  ./run_agent.sh
+
+Expected Output:
+  ✓ Authenticated with Salesforce
+  ✓ Connected to Salesforce Streaming API
+  ✓ Listening for events...
+  Agent is running. Press Ctrl+C to stop.
+
+┌─────────────────────────────────────────────────────────────────┐
+│ STEP 5: TEST IT (3 minutes)                                      │
+└─────────────────────────────────────────────────────────────────┘
+
+In Salesforce:
+  1. Go to Cases tab → New
+  2. Fill in required fields
+  3. Set Cluster ID = test-cluster-001
+  4. Click Save
+  
+Watch Terminal:
+  - Should see "Processing case..." within 5 seconds
+  
+Check Salesforce:
+  - Case → Related → Case Comments
+  - Should see AI-generated internal comment!
+
+┌─────────────────────────────────────────────────────────────────┐
+│ STEP 6: PUSH TO GITHUB (5 minutes)                               │
+└─────────────────────────────────────────────────────────────────┘
+
+On GitHub.com:
+  1. Go to https://github.com/new
+  2. Name: sfdc-insights-agent
+  3. Don't initialize with README
+  4. Click "Create repository"
+
+In Terminal:
+  git remote add origin https://github.com/YOUR_USERNAME/sfdc-insights-agent.git
+  git push -u origin main
+
+For detailed instructions:
+  cat GITHUB_SETUP.md
+
+═══════════════════════════════════════════════════════════════════
+
+🎯 AVAILABLE TEST CLUSTER IDs:
+
+  test-cluster-001     - Healthy AWS IPI cluster
+  prod-cluster-042     - Azure UPI with warnings
+  rosa-cluster-99      - Managed ROSA cluster
+  assisted-cluster-23  - BareMetal assisted
+  aro-cluster-17       - Azure Red Hat OpenShift
+
+═══════════════════════════════════════════════════════════════════
+
+📖 DOCUMENTATION REFERENCE:
+
+  START_HERE.md        - Begin here, navigation guide
+  HOW_TO_RUN.md        - Complete step-by-step setup
+  QUICK_START.md       - 30-minute fast track
+  SALESFORCE_SETUP.md  - SFDC configuration details
+  GITHUB_SETUP.md      - Push to GitHub guide
+  COMMANDS.md          - Command reference for daily use
+  README.md            - Full project documentation
+  PROJECT_SUMMARY.md   - Architecture & technical details
+
+═══════════════════════════════════════════════════════════════════
+
+🆘 TROUBLESHOOTING:
+
+  Problem: Can't authenticate to SFDC
+  Solution: Check credentials in config/.env
+  
+  Problem: No events received
+  Solution: Verify Apex trigger saved, Cluster ID filled
+  
+  Problem: Comment not posted
+  Solution: Check logs/agent.log for errors
+
+═══════════════════════════════════════════════════════════════════
+
+💡 QUICK COMMANDS:
+
+  Start agent:     ./run_agent.sh
+  Test components: ./quick_test.sh
+  View logs:       tail -f logs/agent.log
+  Stop agent:      Ctrl+C (or: pkill -f "python -m src.agent")
+
+═══════════════════════════════════════════════════════════════════
+
+🎉 START NOW:
+
+  cat HOW_TO_RUN.md
+
+═══════════════════════════════════════════════════════════════════

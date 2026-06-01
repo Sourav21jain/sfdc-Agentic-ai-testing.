@@ -1,0 +1,82 @@
+{
+  "clusters": {
+    "test-cluster-001": {
+      "cluster_id": "test-cluster-001",
+      "version": "4.15.2",
+      "platform": "AWS",
+      "install_type": "IPI",
+      "region": "us-east-1",
+      "node_count": 5,
+      "last_updated": "2026-06-01T10:00:00Z",
+      "health_status": "Healthy",
+      "alerts": [],
+      "control_plane_nodes": 3,
+      "worker_nodes": 2,
+      "architecture": "x86_64"
+    },
+    "prod-cluster-042": {
+      "cluster_id": "prod-cluster-042",
+      "version": "4.14.8",
+      "platform": "Azure",
+      "install_type": "UPI",
+      "region": "eastus2",
+      "node_count": 12,
+      "last_updated": "2026-05-30T15:30:00Z",
+      "health_status": "Degraded",
+      "alerts": [
+        {
+          "severity": "warning",
+          "message": "High memory usage on worker-3",
+          "timestamp": "2026-05-30T14:00:00Z"
+        }
+      ],
+      "control_plane_nodes": 3,
+      "worker_nodes": 9,
+      "architecture": "x86_64"
+    },
+    "rosa-cluster-99": {
+      "cluster_id": "rosa-cluster-99",
+      "version": "4.15.0",
+      "platform": "AWS",
+      "install_type": "ROSA",
+      "region": "us-west-2",
+      "node_count": 8,
+      "last_updated": "2026-06-01T08:00:00Z",
+      "health_status": "Healthy",
+      "alerts": [],
+      "control_plane_nodes": 3,
+      "worker_nodes": 5,
+      "architecture": "x86_64",
+      "managed": true
+    },
+    "assisted-cluster-23": {
+      "cluster_id": "assisted-cluster-23",
+      "version": "4.13.12",
+      "platform": "BareMetal",
+      "install_type": "Assisted",
+      "region": "on-premise",
+      "node_count": 6,
+      "last_updated": "2026-05-28T12:00:00Z",
+      "health_status": "Healthy",
+      "alerts": [],
+      "control_plane_nodes": 3,
+      "worker_nodes": 3,
+      "architecture": "x86_64"
+    },
+    "aro-cluster-17": {
+      "cluster_id": "aro-cluster-17",
+      "version": "4.14.5",
+      "platform": "Azure",
+      "install_type": "ARO",
+      "region": "westeurope",
+      "node_count": 10,
+      "last_updated": "2026-05-31T09:00:00Z",
+      "health_status": "Healthy",
+      "alerts": [],
+      "control_plane_nodes": 3,
+      "worker_nodes": 7,
+      "architecture": "x86_64",
+      "managed": true
+    }
+  }
+}
