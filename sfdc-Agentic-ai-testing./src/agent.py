@@ -59,7 +59,7 @@ class InsightsAgent:
         )
 
         self.comment_generator = CommentGenerator(
-            api_key=self.anthropic_api_key,
+            api_key=self.gemini_api_key,
             include_support_tips=self.config['agent']['include_support_tips']
         )
 
@@ -95,11 +95,11 @@ class InsightsAgent:
         self.sfdc_password = os.getenv("SFDC_PASSWORD")
         self.sfdc_security_token = os.getenv("SFDC_SECURITY_TOKEN")
         self.sfdc_domain = os.getenv("SFDC_DOMAIN", "test")
-        self.anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
+        self.gemini_api_key = os.getenv("GEMINI_API_KEY")
 
         # Validate required env vars
         required_vars = [
-            "SFDC_USERNAME", "SFDC_PASSWORD", "SFDC_SECURITY_TOKEN", "ANTHROPIC_API_KEY"
+            "SFDC_USERNAME", "SFDC_PASSWORD", "SFDC_SECURITY_TOKEN", "GEMINI_API_KEY"
         ]
         missing = [var for var in required_vars if not os.getenv(var)]
         if missing:

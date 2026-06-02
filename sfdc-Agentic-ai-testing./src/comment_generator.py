@@ -1,26 +1,27 @@
 """
 AI-Powered Comment Generator
-Uses Claude API to format cluster insights into support-friendly comments
+Uses Google Gemini API to format cluster insights into support-friendly comments
 """
 import logging
 from typing import Dict, Optional
-from anthropic import Anthropic
+import google.generativeai as genai
 
 logger = logging.getLogger(__name__)
 
 
 class CommentGenerator:
-    """Generate formatted internal comments using Claude API"""
+    """Generate formatted internal comments using Google Gemini API"""
 
     def __init__(self, api_key: str, include_support_tips: bool = True):
         """
         Initialize comment generator
 
         Args:
-            api_key: Anthropic API key
+            api_key: Google Gemini API key
             include_support_tips: Whether to include AI-generated support tips
         """
-        self.client = Anthropic(api_key=api_key)
+        genai.configure(api_key=api_key)
+        self.model = genai.GenerativeModel('gemini-1.5-flash')
         self.include_support_tips = include_support_tips
 
     def generate_comment(self, cluster_insights: Dict, comment_prefix: str = "") -> str:
@@ -39,39 +40,30 @@ class CommentGenerator:
             return self._generate_no_data_comment(comment_prefix)
 
         try:
-            # Construct the prompt for Claude
+            # Construct the prompt for Gemini
+            system_instruction = "You are an expert OpenShift support assistant. Format cluster insights into clear, actionable internal comments for support engineers."
             prompt = self._build_prompt(cluster_insights)
 
-            # Call Claude API with prompt caching
-            response = self.client.messages.create(
-                model="claude-sonnet-4-5@20250929",
-                max_tokens=1024,
-                system=[
-                    {
-                        "type": "text",
-                        "text": "You are an expert OpenShift support assistant. Format cluster insights into clear, actionable internal comments for support engineers.",
-                        "cache_control": {"type": "ephemeral"}
-                    }
-                ],
-                messages=[
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ]
+            # Call Gemini API
+            response = self.model.generate_content(
+                f"{system_instruction}\n\n{prompt}",
+                generation_config=genai.types.GenerationConfig(
+                    max_output_tokens=1024,
+                    temperature=0.7,
+                )
             )
 
-            comment_body = response.content[0].text
+            comment_body = response.text
 
             # Add prefix if provided
             if comment_prefix:
                 comment_body = f"{comment_prefix}\n\n{comment_body}"
 
-            logger.info("Successfully generated comment using Claude API")
+            logger.info("Successfully generated comment using Google Gemini API")
             return comment_body
 
         except Exception as e:
-            logger.error(f"Error generating comment with Claude API: {e}")
+            logger.error(f"Error generating comment with Gemini API: {e}")
             return self._generate_fallback_comment(cluster_insights, comment_prefix)
 
     def _build_prompt(self, insights: Dict) -> str:
@@ -195,9 +187,9 @@ if __name__ == "__main__":
         "last_updated": "2026-06-01T10:00:00Z"
     }
 
-    api_key = os.getenv("ANTHROPIC_API_KEY")
+    api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
-        print("✗ ANTHROPIC_API_KEY not found in .env file")
+        print("✗ GEMINI_API_KEY not found in .env file")
         print("Testing fallback comment generation...")
         generator = CommentGenerator(api_key="dummy")
         comment = generator._generate_fallback_comment(
