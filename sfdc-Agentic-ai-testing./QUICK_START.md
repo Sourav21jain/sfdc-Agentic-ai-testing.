@@ -6,7 +6,7 @@ Get the OpenShift Insights Agent running in under 30 minutes.
 
 - [ ] Python 3.9+ installed (`python3 --version`)
 - [ ] Salesforce Developer Org (free - see Step 1)
-- [ ] Anthropic API key for Claude ([Get one here](https://console.anthropic.com/))
+- [ ] Google Gemini API key (100% FREE - [Get one here](https://aistudio.google.com/app/apikey))
 - [ ] 30 minutes of time
 
 ## Step 1: Salesforce Setup (15 minutes)
@@ -60,7 +60,7 @@ SFDC_USERNAME=your.username@example.com
 SFDC_PASSWORD=YourPassword123
 SFDC_SECURITY_TOKEN=AbCdEfGhIjKlMnOp
 SFDC_DOMAIN=test
-ANTHROPIC_API_KEY=sk-ant-your-api-key-here
+GEMINI_API_KEY=AIzaSy...your-gemini-api-key-here
 LOG_LEVEL=INFO
 ```
 
@@ -160,10 +160,11 @@ When everything works, the internal comment will look like:
 - Verify case ID is valid
 - Ensure CaseComment object permissions are correct
 
-### "Claude API error"
-- Verify `ANTHROPIC_API_KEY` in `.env`
-- Check your API quota/limits
-- Agent will fall back to basic formatting if Claude fails
+### "Gemini API error"
+- Verify `GEMINI_API_KEY` in `.env`
+- Get free API key at: https://aistudio.google.com/app/apikey
+- Check your API quota (1,500 requests/day on free tier)
+- Agent will fall back to basic formatting if Gemini fails
 
 ## Next Steps
 
@@ -195,7 +196,7 @@ When everything works, the internal comment will look like:
          │
          ├─→ Insights Service (mock_insights.json)
          │
-         ├─→ Comment Generator (Claude API)
+         ├─→ Comment Generator (Google Gemini API - FREE)
          │
          └─→ SFDC Client (simple-salesforce)
                    │
@@ -212,7 +213,7 @@ insights-tool/
 │   ├── sfdc_client.py        # Salesforce API
 │   ├── event_listener.py     # Platform Events
 │   ├── insights_service.py   # Mock data
-│   └── comment_generator.py  # Claude AI
+│   └── comment_generator.py  # Google Gemini AI
 ├── data/
 │   └── mock_insights.json    # Test cluster data
 ├── config/

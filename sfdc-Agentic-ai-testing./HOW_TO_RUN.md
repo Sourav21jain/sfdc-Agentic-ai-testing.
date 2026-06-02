@@ -5,7 +5,7 @@
 Before starting, make sure you have:
 - [ ] Python 3.9 or higher installed
 - [ ] A Salesforce Developer Org (we'll set this up)
-- [ ] An Anthropic API key (we'll get this)
+- [ ] A Google Gemini API key (we'll get this - **100% FREE**)
 
 Check Python version:
 ```bash
@@ -13,14 +13,20 @@ python3 --version
 # Should show 3.9 or higher
 ```
 
-## Step 1: Get Anthropic API Key (2 minutes)
+## Step 1: Get FREE Google Gemini API Key (2 minutes)
 
-1. Go to https://console.anthropic.com/
-2. Sign up or log in
-3. Click on your profile → "API Keys"
-4. Click "Create Key"
-5. Copy the key (starts with `sk-ant-...`)
+1. Go to https://aistudio.google.com/app/apikey
+2. Sign in with your Google account (personal or work)
+3. Click **"Create API Key"** or **"Get API Key"**
+4. Select **"Create API key in new project"** (recommended)
+5. Copy the key (starts with `AIza...`)
 6. Save it somewhere safe
+
+**Why Gemini?**
+- ✅ Completely FREE (no credit card required)
+- ✅ 1,500 requests per day (free tier)
+- ✅ High quality AI responses
+- ✅ No expiration on free tier
 
 ## Step 2: Set Up Salesforce Developer Org (15 minutes)
 
@@ -181,7 +187,7 @@ SFDC_USERNAME=yourname.insights@mycompany.com
 SFDC_PASSWORD=YourSalesforcePassword123
 SFDC_SECURITY_TOKEN=AbCdEfGhIjKlMnOpQrStUvWxYz
 SFDC_DOMAIN=test
-ANTHROPIC_API_KEY=sk-ant-api01-your-actual-key-here
+GEMINI_API_KEY=AIzaSy...your-actual-gemini-key-here
 LOG_LEVEL=INFO
 ```
 
@@ -190,7 +196,7 @@ LOG_LEVEL=INFO
 - `SFDC_PASSWORD`: Your Salesforce password (from Step 2.1)
 - `SFDC_SECURITY_TOKEN`: The token from your email (Step 2.6)
 - `SFDC_DOMAIN`: Use `test` for Developer Edition orgs
-- `ANTHROPIC_API_KEY`: Your Claude API key (from Step 1)
+- `GEMINI_API_KEY`: Your Google Gemini API key (from Step 1)
 
 Save the file:
 - Press `Ctrl + X`
@@ -261,7 +267,7 @@ Switch back to your terminal. Within 5-10 seconds you should see:
 INFO - Received event: {...}
 INFO - Processing case 500... with cluster test-cluster-001
 INFO - Found insights for cluster: test-cluster-001
-INFO - Successfully generated comment using Claude API
+INFO - Successfully generated comment using Google Gemini API
 INFO - Successfully posted internal comment ... to case 500...
 INFO - Successfully processed case 500...
 ```

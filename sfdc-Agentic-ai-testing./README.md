@@ -4,7 +4,7 @@ An AI-powered agent that automatically posts OpenShift cluster insights as inter
 
 ## Overview
 
-This agent listens for Salesforce Platform Events when new cases are created with cluster IDs, fetches cluster insights data (currently from mock data, designed for future Tableau integration), and uses Claude AI to generate well-formatted internal comments for support engineers.
+This agent listens for Salesforce Platform Events when new cases are created with cluster IDs, fetches cluster insights data (currently from mock data, designed for future Tableau integration), and uses Google Gemini AI to generate well-formatted internal comments for support engineers.
 
 ## Architecture
 
@@ -15,7 +15,7 @@ Event Listener (aiosfstream)
         ↓
 Insights Service (Mock Data / Future: Tableau API)
         ↓
-Comment Generator (Claude AI)
+Comment Generator (Google Gemini AI)
         ↓
 SFDC Client → Post Internal Comment
 ```
@@ -23,7 +23,7 @@ SFDC Client → Post Internal Comment
 ## Features
 
 - 🎯 **Real-time Event Processing**: Listens to Salesforce Platform Events
-- 🤖 **AI-Powered Formatting**: Uses Claude API to generate clear, actionable comments
+- 🤖 **AI-Powered Formatting**: Uses Google Gemini API (FREE) to generate clear, actionable comments
 - 📊 **Mock Insights Data**: Simulates Tableau data source (ready for future integration)
 - 🔄 **Automatic Retry Logic**: Handles transient failures gracefully
 - ✅ **Idempotency**: Prevents duplicate comments on the same case
@@ -33,7 +33,7 @@ SFDC Client → Post Internal Comment
 
 - Python 3.9+
 - Salesforce Developer Edition Org (free)
-- Anthropic API key for Claude
+- Google Gemini API key (100% FREE - no credit card required)
 - macOS (tested) or Linux
 
 ## Project Structure
@@ -150,15 +150,17 @@ cp config/.env.example config/.env
 nano config/.env
 ```
 
-Fill in your Salesforce and Anthropic credentials:
+Fill in your Salesforce and Google Gemini credentials:
 ```
 SFDC_USERNAME=your_email@example.com
 SFDC_PASSWORD=your_salesforce_password
 SFDC_SECURITY_TOKEN=your_security_token_from_email
 SFDC_DOMAIN=test
-ANTHROPIC_API_KEY=sk-ant-your-api-key
+GEMINI_API_KEY=AIzaSy...your-gemini-api-key
 LOG_LEVEL=INFO
 ```
+
+**Get your FREE Gemini API key**: https://aistudio.google.com/app/apikey
 
 #### 2.3 Install Dependencies
 ```bash
@@ -244,7 +246,7 @@ Agent is running. Press Ctrl+C to stop.
    INFO - Received event: {...}
    INFO - Processing case 500... with cluster test-cluster-001
    INFO - Found insights for cluster: test-cluster-001
-   INFO - Successfully generated comment using Claude API
+   INFO - Successfully generated comment using Google Gemini API
    INFO - Successfully posted internal comment ... to case 500...
    INFO - Successfully processed case 500...
    ```
@@ -350,10 +352,11 @@ launchctl unload ~/Library/LaunchAgents/com.insights.agent.plist
 - Verify CaseComment object permissions in Salesforce
 - Ensure the case ID is valid
 
-### Claude API errors
-- Verify `ANTHROPIC_API_KEY` in `.env`
-- Check API quota/limits
+### Gemini API errors
+- Verify `GEMINI_API_KEY` in `.env`
+- Check API quota/limits (1,500 requests/day on free tier)
 - Review logs for specific error messages
+- Get your free API key: https://aistudio.google.com/app/apikey
 
 ## Future Enhancements
 
@@ -374,10 +377,11 @@ launchctl unload ~/Library/LaunchAgents/com.insights.agent.plist
 - Scalable and reliable
 - No custom REST endpoint needed
 
-### Why Claude API?
+### Why Google Gemini API?
+- 100% FREE with generous limits (1,500 requests/day)
+- No credit card required
 - Superior formatting and contextual awareness
 - Can provide support tips based on cluster config
-- Prompt caching reduces costs for repeated patterns
 - Handles edge cases better than templates
 
 ### Why Mock Data?

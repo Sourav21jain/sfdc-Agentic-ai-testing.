@@ -168,7 +168,7 @@ SFDC_USERNAME=yourname.insights@example.com
 SFDC_PASSWORD=YourPassword123
 SFDC_SECURITY_TOKEN=AbCdEfGhIjKlMnOpQrSt
 SFDC_DOMAIN=test
-ANTHROPIC_API_KEY=sk-ant-your-key-here
+GEMINI_API_KEY=AIzaSy...your-gemini-api-key-here
 LOG_LEVEL=INFO
 ```
 
